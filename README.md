@@ -36,7 +36,7 @@ If you use fabric or quilt, this will not happen.
 
 You need Java 17
 
-To build run: ``gradlew build``
+To build run: ``gradlew shadow``
 
 ### Credits
 

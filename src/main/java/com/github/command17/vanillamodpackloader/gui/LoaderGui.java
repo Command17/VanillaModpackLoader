@@ -14,7 +14,7 @@ public class LoaderGui extends JFrame {
 
     private JTabbedPane contentPane;
 
-    public LoaderGui() throws IOException {
+    public LoaderGui() {
         initComponents();
         setContentPane(contentPane);
 
