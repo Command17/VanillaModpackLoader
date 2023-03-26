@@ -35,7 +35,7 @@ If you use fabric or quilt, this will not happen.
 
 ## Changelog
 
-You can find the changelog in the changelog.md file or the release-
+You can find the changelog in the changelog.md file or the release
 
 ## Compile it yourself
 
