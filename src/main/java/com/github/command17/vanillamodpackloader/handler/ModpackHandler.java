@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class ModpackHandler extends Handler {
@@ -68,24 +69,24 @@ public class ModpackHandler extends Handler {
 
                     @Nullable String modZip = toml.getString("modpack.modZip.zip");
 
-                    @Nullable List<String> modArray = toml.getList("modpack.mods.mods");
+                    @Nullable Toml modTable = toml.getTable("modpack.mods");
 
                     // Install Mods from Array
 
                     Random rng = new Random();
 
-                    if (modArray != null && !modArray.isEmpty()) {
-                        for (String modUrl: modArray) {
+                    if (modTable != null && !modTable.isEmpty()) {
+                        for (Map.Entry<String, Object> modEntry: modTable.entrySet()) {
                             try {
-                                InputStream in = new URL(modUrl).openStream();
+                                InputStream in = new URL(modEntry.getValue().toString()).openStream();
 
-                                String path = Path.of(modsPath, "mod" + rng.nextInt(0, 4000) + ".jar").toAbsolutePath().toString();
+                                String path = Path.of(modsPath, modEntry.getKey() + rng.nextInt(0, 4000) + ".jar").toAbsolutePath().toString();
 
                                 Files.copy(in, Path.of(path));
 
-                                status("Installed " + modUrl);
+                                status("Installed " + modEntry.getValue().toString());
                             } catch (Exception e) {
-                                error("Unable to download " + modUrl);
+                                error("Unable to download " + modEntry.getValue().toString());
                             }
                         }
                     }
@@ -168,7 +169,12 @@ public class ModpackHandler extends Handler {
 
                                     Files.copy(in, Paths.get(installerPath), StandardCopyOption.REPLACE_EXISTING);
 
-                                    Runtime.getRuntime().exec("java -jar " + installerPath + " client -mcversion " + loaderMcVersion + " -dir " + minecraftLocation.getText());
+                                    String launcherFlag = null;
+
+                                    if (win32Launcher.isSelected()) launcherFlag = "win32";
+                                    else launcherFlag = "microsoft_store";
+
+                                    Runtime.getRuntime().exec("java -jar " + installerPath + " client -mcversion " + loaderMcVersion + " -dir " + minecraftLocation.getText() + " -launcher " + launcherFlag); // I will assume that everyone uses microsoft_store
 
                                     File fabricInstaller = new File(installerPath);
 

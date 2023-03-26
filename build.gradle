@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id'com.github.johnrengelman.shadow' version '5.2.0'
+    id'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group 'com.github.command17.vanillamodpackloader'
-version '1.0.0'
+version '1.1.0'
 
 repositories {
     mavenCentral()
@@ -37,3 +37,5 @@ jar {
         )
     }
 }
+
+tasks.withType(Copy).all { duplicatesStrategy 'exclude' }

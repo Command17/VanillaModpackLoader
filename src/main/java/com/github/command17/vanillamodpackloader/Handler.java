@@ -14,6 +14,7 @@ public abstract class Handler {
 
     private JPanel pane;
 
+    public JCheckBox win32Launcher;
     public JTextField minecraftLocation;
     public JButton selectFolderButton;
     public JTextField modpackLocation;
@@ -49,6 +50,9 @@ public abstract class Handler {
         addRow(pane, constraints, "VanillaPack Location",
                 modpackLocation = new JTextField(20),
                 selectFileButton = new JButton());
+
+        addRow(pane, constraints, "Minecraft Win32 Launcher",
+                win32Launcher = new JCheckBox());
 
         selectFolderButton.setText("...");
         selectFolderButton.setPreferredSize(new Dimension(minecraftLocation.getPreferredSize().height, minecraftLocation.getPreferredSize().height));

@@ -19,7 +19,8 @@ version = "44.1.23" # the loader version #mandatory
 zip = "link/to.zip" # DIRECT link to zip
 
 [modpack.mods] #option
-mods = ["link/to/mod.jar", "another/mod.jar"] # DIRECT link to mod
+someMod = "link/to/mod.jar" # DIRECT link to mod
+someOtherMod = "another/mod.jar" # DIRECT link to mod
 ```
 
 ## Important for Zip
@@ -32,11 +33,15 @@ If you chose forge, then the installer will show from forge.
 
 If you use fabric or quilt, this will not happen.
 
+## Changelog
+
+You can find the changelog in the changelog.md file or the release-
+
 ## Compile it yourself
 
 You need Java 17
 
-To build run: ``gradlew shadow``
+To build run: ``gradlew shadowJar``
 
 ### Credits
 
